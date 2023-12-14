@@ -16,7 +16,7 @@ struct WalletApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                RegisterView()
+                HomeView()
             }
         }
     }

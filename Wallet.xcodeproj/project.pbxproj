@@ -41,6 +41,11 @@
 		F00B4DBF2B29925D00CA81FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F00B4DBE2B29925D00CA81FE /* FirebaseStorage */; };
 		F00B4DC12B29925D00CA81FE /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = F00B4DC02B29925D00CA81FE /* FirebaseStorageCombine-Community */; };
 		F00B4DC42B29ACE000CA81FE /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DC32B29ACE000CA81FE /* String+Validation.swift */; };
+		F00B4DC72B2B07DC00CA81FE /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DC62B2B07DC00CA81FE /* AuthManager.swift */; };
+		F00B4DCA2B2B0DBD00CA81FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DC92B2B0DBD00CA81FE /* User.swift */; };
+		F00B4DD02B2B127200CA81FE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DCF2B2B127200CA81FE /* HomeView.swift */; };
+		F00B4DD22B2B3A5100CA81FE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DD12B2B3A5100CA81FE /* HomeViewModel.swift */; };
+		F00B4DD42B2B406700CA81FE /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00B4DD32B2B406700CA81FE /* CustomErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +57,11 @@
 		F00B4D872B298CF500CA81FE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		F00B4D892B29914200CA81FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F00B4DC32B29ACE000CA81FE /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
+		F00B4DC62B2B07DC00CA81FE /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F00B4DC92B2B0DBD00CA81FE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F00B4DCF2B2B127200CA81FE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F00B4DD12B2B3A5100CA81FE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F00B4DD32B2B406700CA81FE /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +122,11 @@
 			isa = PBXGroup;
 			children = (
 				F00B4D712B28664F00CA81FE /* WalletApp.swift */,
+				F00B4DCB2B2B123E00CA81FE /* Core */,
+				F00B4DC82B2B0DAF00CA81FE /* Models */,
+				F00B4DC52B2B07D000CA81FE /* Managers */,
 				F00B4DC22B29ACB900CA81FE /* Extensions */,
 				F00B4D842B2885A300CA81FE /* Components */,
-				F00B4D7F2B2882B400CA81FE /* Register */,
 				F00B4D752B28665000CA81FE /* Assets.xcassets */,
 				F00B4D892B29914200CA81FE /* GoogleService-Info.plist */,
 				F00B4D772B28665000CA81FE /* Preview Content */,
@@ -168,6 +180,57 @@
 				F00B4DC32B29ACE000CA81FE /* String+Validation.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F00B4DC52B2B07D000CA81FE /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DC62B2B07DC00CA81FE /* AuthManager.swift */,
+				F00B4DD32B2B406700CA81FE /* CustomErrors.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		F00B4DC82B2B0DAF00CA81FE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DC92B2B0DBD00CA81FE /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F00B4DCB2B2B123E00CA81FE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DCC2B2B125C00CA81FE /* Home */,
+				F00B4D7F2B2882B400CA81FE /* Register */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F00B4DCC2B2B125C00CA81FE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DCD2B2B126100CA81FE /* View */,
+				F00B4DCE2B2B126500CA81FE /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F00B4DCD2B2B126100CA81FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DCF2B2B127200CA81FE /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F00B4DCE2B2B126500CA81FE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F00B4DD12B2B3A5100CA81FE /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,9 +337,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F00B4D832B28831900CA81FE /* RegisterView.swift in Sources */,
+				F00B4DD42B2B406700CA81FE /* CustomErrors.swift in Sources */,
+				F00B4DD02B2B127200CA81FE /* HomeView.swift in Sources */,
 				F00B4D722B28664F00CA81FE /* WalletApp.swift in Sources */,
+				F00B4DD22B2B3A5100CA81FE /* HomeViewModel.swift in Sources */,
+				F00B4DCA2B2B0DBD00CA81FE /* User.swift in Sources */,
 				F00B4D882B298CF500CA81FE /* RegisterViewModel.swift in Sources */,
 				F00B4DC42B29ACE000CA81FE /* String+Validation.swift in Sources */,
+				F00B4DC72B2B07DC00CA81FE /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

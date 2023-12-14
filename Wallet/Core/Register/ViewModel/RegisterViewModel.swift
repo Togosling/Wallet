@@ -14,9 +14,12 @@ class RegisterViewModel: ObservableObject {
     @Published var isEmailValid: Bool = true
     @Published var isPasswordValid: Bool = true
     
-    func signIn() {
-        if email.isValidEmail() && password {
-            isEmailValid = false
+    @MainActor func register() async throws {
+        isEmailValid = email.isValidEmail()
+        isPasswordValid = password.isValidPassword()
+        
+        if isEmailValid && isPasswordValid {
+            try await AuthManager.shared.createUser(email: email, password: password)
         }
     }
 }

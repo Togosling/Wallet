@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct RegisterView: View {
+        
+    @Environment(\.dismiss) var dismiss
     
     @StateObject private var registerViewModel: RegisterViewModel = RegisterViewModel()
     
+    @State private var registerError: Error?
+        
     var body: some View {
         ZStack {
             Color.background
@@ -27,21 +31,29 @@ struct RegisterView: View {
                 
                 inputTextFieldsView
                 
-                continueButton
+                registerButton
                 
                 alternativeRegistrationView
             }
         }
+        .alert(registerError?.localizedDescription ?? "", isPresented: registerError == nil ?  .constant(false) : .constant(true), actions: {})
     }
 }
 
 extension RegisterView {
     
-    private var continueButton: some View {
+    private var registerButton: some View {
         Button(action: {
-            registerViewModel.signIn()
+            Task {
+                do {
+                    try await registerViewModel.register()
+                    dismiss()
+                } catch {
+                    registerError = error
+                }
+            }
         }, label: {
-            Text("Continue")
+            Text("Register")
                 .foregroundStyle(Color.black)
                 .font(.title2)
                 .bold()
@@ -52,36 +64,47 @@ extension RegisterView {
                         .foregroundStyle(Color.customAccent)
                 )
         })
-        .padding()
+        .padding(.horizontal)
     }
     
     private var inputTextFieldsView: some View {
-        VStack() {
-            HStack(spacing: 8) {
-                Image(systemName: "envelope")
-                TextField("Email", text: $registerViewModel.email)
+        VStack {
+            VStack {
+                HStack(spacing: 8) {
+                    Image(systemName: "envelope")
+                    TextField("Email", text: $registerViewModel.email)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .stroke(style: StrokeStyle())
+                        .foregroundStyle(registerViewModel.isEmailValid ? Color.primary : Color.red)
+                )
+                
+                Text("Invalid Email")
+                    .foregroundStyle(Color.red)
+                    .opacity(registerViewModel.isEmailValid ? 0.0 : 1.0)
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .stroke(style: StrokeStyle())
-                    .foregroundStyle(Color.primary)
-            )
-            .padding()
             
-            HStack(spacing: 8) {
-                Image(systemName: "lock")
-                SecureField("Password", text: $registerViewModel.password)
+            VStack {
+                HStack(spacing: 8) {
+                    Image(systemName: "lock")
+                    SecureField("Password", text: $registerViewModel.password)
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .stroke(style: StrokeStyle())
+                        .foregroundStyle(registerViewModel.isPasswordValid ? Color.primary : Color.red)
+                )
+                
+                Text("Invalid Password")
+                    .foregroundStyle(Color.red)
+                    .opacity(registerViewModel.isPasswordValid ? 0.0 : 1.0)
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .stroke(style: StrokeStyle())
-                    .foregroundStyle(Color.primary)
-            )
-            .padding()
         }
         .font(.subheadline)
+        .padding(.horizontal)
     }
     
     private var alternativeRegistrationView: some View {
@@ -107,7 +130,7 @@ extension RegisterView {
             }
             
             Spacer()
-
+            
             Button {
                 
             } label: {
@@ -117,5 +140,6 @@ extension RegisterView {
             }
         }
         .padding(.horizontal, 80)
+        .padding(.vertical)
     }
 }
